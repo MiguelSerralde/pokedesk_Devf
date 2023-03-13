@@ -112,9 +112,9 @@ aside, nav {
     height: 300px;
 }
 
-.image-1 {
-    background-color: black;
-    width: 200px;
+.gallery_poke:hover {
+    cursor: pointer;
+    border: 4px solid;
 }
 
 @media (max-width: 600px) {
