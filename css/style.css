@@ -103,13 +103,35 @@ aside, nav {
     justify-content: center;        
     flex-wrap: wrap;
     width: 100%;
+    position: relative;
+    column-gap: 10px; 
 
-    column-gap: 10px;    
+}
+
+.poke_info {
+    border: 2px solid;
+    margin-left: 25%;
+    margin-top: 5%;
+    border-radius: 10px;
+    display: none;
+    position: fixed;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: antiquewhite;
+    width: 50%;
+    height: 50%;
 }
 
 .gallery img {
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
+}
+
+.btn_aceptar {
+    margin: 5%;
+    font-weight: bolder;
+    font-style: italic;
 }
 
 .gallery_poke:hover {
