@@ -1,8 +1,26 @@
-addPokemon()
+const divPokeGallery = document.createElement('div')
+const imgPokeGallery = document.createElement('img')
+const pPokeGallery = document.createComment('p')
 
-function addPokemon() {
-    const galleryAddChild = document.getElementById("gallery")    
-    console.log(galleryAddChild)
+for (i=0; i<20; i++){
+  addPokemon(i)  
+}
+
+function addPokemon(pokenum) {    
+    pokenum = pokenum + 1
+    const galleryAddChild = []
+    galleryAddChild[pokenum] = document.getElementById("gallery")    
+    galleryAddChild[pokenum].appendChild(divPokeGallery)    
+    
+    divPokeGallery.classList.add('poke')
+    divPokeGallery.setAttribute('id', 'poke' + pokenum)    
+    const pokemonFlex = document.getElementById('poke'+pokenum)    
+    
+    imgPokeGallery.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ pokenum +'.png'
+    imgPokeGallery.alt=''
+    imgPokeGallery.title=''
+    imgPokeGallery.classList.add('gallery_poke')
+    pokemonFlex.appendChild(imgPokeGallery)        
 }
 
 function max_imgData(){        
