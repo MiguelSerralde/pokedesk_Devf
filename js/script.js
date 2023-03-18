@@ -1,3 +1,10 @@
+addPokemon()
+
+function addPokemon() {
+    const galleryAddChild = document.getElementById("gallery")    
+    console.log(galleryAddChild)
+}
+
 function max_imgData(){        
     document.getElementById("menu_left").style.filter = "blur(2px)"
     document.getElementById("menu_right").style.filter = "blur(2px)"
@@ -14,19 +21,28 @@ function max_imgData(){
       element.style.pointerEvents = 'none'
     });
 
-    document.getElementById("poke_info").style.display = "flex"
+    document.getElementById("poke_info").style.display = "flex"   
+    
+    // fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
+    // .then (res => res.json())
+    // .then (data => console.log(data))
+    // .catch (error => console.log(error))
+    
+    async function obtenerDatosAPI() {
+        const respuesta = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
+        const datos = await respuesta.json()
+        return datos       
+      }    
 
-    miFuncion() 
-    .then (data => {
-        const pokemon = data     
-        resolve(pokemon)
-    })
-    .catch (error => {
-        console.log(error)
-    });
+      obtenerDatosAPI().then(datos => {
+        const name = (datos.species.name)
+        const ability = (datos.abilities[1].ability.name);
 
-    console.log(pokemon)
-}
+        pokeData(name,ability)
+      }).catch(error => {
+        console.error(error);
+      });            
+}    
 
 function backStart() {
     document.getElementById("menu_left").style.filter = "none"
@@ -47,16 +63,6 @@ function backStart() {
     document.getElementById("poke_info").style.display = "none"
 }
 
-function miFuncion() {
-    return new Promise((resolve, reject) => {
-      fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
-        .then(response => response.json())
-        .then(data => {         
-          resolve(data);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
-    
-  }
+function pokeData (name, ability) {
+    console.log(name, ability)
+}
