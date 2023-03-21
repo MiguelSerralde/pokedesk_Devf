@@ -1,16 +1,16 @@
-const divPokeGallery = document.createElement('div')
-const imgPokeGallery = document.createElement('img')
-const pPokeGallery = document.createComment('p')
 
 for (i=0; i<20; i++){
   addPokemon(i)  
 }
 
 function addPokemon(pokenum) {    
-    pokenum = pokenum + 1
-    const galleryAddChild = []
-    galleryAddChild[pokenum] = document.getElementById("gallery")    
-    galleryAddChild[pokenum].appendChild(divPokeGallery)    
+  const divPokeGallery = document.createElement('div')
+  const imgPokeGallery = document.createElement('img')
+  const pPokeGallery = document.createComment('p')
+
+    pokenum = pokenum + 1    
+    galleryAddChild = document.getElementById("gallery")    
+    galleryAddChild.appendChild(divPokeGallery)    
     
     divPokeGallery.classList.add('poke')
     divPokeGallery.setAttribute('id', 'poke' + pokenum)    
