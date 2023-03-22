@@ -1,16 +1,16 @@
 
-for (i=0; i<20; i++){
+for (let i=0; i<20; i++){
   addPokemon(i)  
 }
 
 function addPokemon(pokenum) {    
-  const divPokeGallery = document.createElement('div')
-  const imgPokeGallery = document.createElement('img')
-  const pPokeGallery = document.createComment('p')
-
+    const divPokeGallery = document.createElement('div')
+    const imgPokeGallery = document.createElement('img')
+    const pPokeGallery = document.createComment('p')
+    const galleryAddChild = document.getElementById("gallery")    
     pokenum = pokenum + 1    
-    galleryAddChild = document.getElementById("gallery")    
-    galleryAddChild.appendChild(divPokeGallery)    
+    
+    galleryAddChild.appendChild(divPokeGallery)       
     
     divPokeGallery.classList.add('poke')
     divPokeGallery.setAttribute('id', 'poke' + pokenum)    
@@ -20,7 +20,8 @@ function addPokemon(pokenum) {
     imgPokeGallery.alt=''
     imgPokeGallery.title=''
     imgPokeGallery.classList.add('gallery_poke')
-    pokemonFlex.appendChild(imgPokeGallery)        
+    pokemonFlex.appendChild(imgPokeGallery)     
+    pokemonFlex.appendChild(pPokeGallery)  
 }
 
 function max_imgData(){        
