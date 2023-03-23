@@ -6,12 +6,13 @@ for (let i=0; i<20; i++){
 function addPokemon(pokenum) {    
     const divPokeGallery = document.createElement('div')
     const imgPokeGallery = document.createElement('img')
-    const pPokeGallery = document.createComment('p')
     const galleryAddChild = document.getElementById("gallery")    
+    const pPokeGallery = document.createElement('p')
+    
+    const divPokeData = document.createElement('div')
+
     pokenum = pokenum + 1    
-    
     galleryAddChild.appendChild(divPokeGallery)       
-    
     divPokeGallery.classList.add('poke')
     divPokeGallery.setAttribute('id', 'poke' + pokenum)    
     const pokemonFlex = document.getElementById('poke'+pokenum)    
@@ -19,9 +20,12 @@ function addPokemon(pokenum) {
     imgPokeGallery.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ pokenum +'.png'
     imgPokeGallery.alt=''
     imgPokeGallery.title=''
-    imgPokeGallery.classList.add('gallery_poke')
-    pokemonFlex.appendChild(imgPokeGallery)     
-    pokemonFlex.appendChild(pPokeGallery)  
+    imgPokeGallery.classList.add('gallery_poke')         
+    pokemonFlex.appendChild(imgPokeGallery)
+    divPokeGallery.appendChild(divPokeData)   
+    divPokeData.setAttribute('id', 'pokeData' + pokenum)
+    pPokeGallery.textContent = 'Name'
+    divPokeData.appendChild(pPokeGallery)
 }
 
 function max_imgData(){        
@@ -40,13 +44,8 @@ function max_imgData(){
       element.style.pointerEvents = 'none'
     });
 
-    document.getElementById("poke_info").style.display = "flex"   
-    
-    // fetch("https://pokeapi.co/api/v2/pokemon/pikachu")
-    // .then (res => res.json())
-    // .then (data => console.log(data))
-    // .catch (error => console.log(error))
-    
+    document.getElementById("poke_info").style.display = "flex"     
+     
     async function obtenerDatosAPI() {
         const respuesta = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
         const datos = await respuesta.json()
