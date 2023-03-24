@@ -87,8 +87,7 @@ aside, nav {
     cursor: pointer;    
     font-size: bolder;
     font-size: 20px;
-    text-shadow: 1px 1px;
-    
+    text-shadow: 1px 1px;    
 }
 
 .logo {
@@ -153,6 +152,7 @@ aside, nav {
 .poke:hover {
     cursor: pointer;
     border: 4px solid;
+    border-radius: 10px;
 }
 
 .Labeldiv{
