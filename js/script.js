@@ -1,17 +1,27 @@
 
-for (let i=0; i<20; i++){
+for (let i=0; i<50; i++){
   addPokemon(i)  
 }
 
 function addPokemon(pokenum) {    
     const divPokeGallery = document.createElement('div')
     const imgPokeGallery = document.createElement('img')
-    const galleryAddChild = document.getElementById("gallery")    
-    const pPokeGallery = document.createElement('p')
+    const galleryAddChild = document.getElementById('gallery')    
+    const divPokeNameLabel = document.createElement('div')
+    const pPokeNameLabel = document.createElement('p')
+    const pPokeName = document.createElement('p')
+    const divPokeAbilityLabel = document.createElement('div')
+    const pPokeAbilityLabel = document.createElement('p')
+    const pPokeAbility = document.createElement('p')
+    const divPokeTypeLabel = document.createElement('div')
+    const pPokeTypeLabel = document.createElement('p')
+    const pPokeType = document.createElement('p')
     
     const divPokeData = document.createElement('div')
 
     pokenum = pokenum + 1    
+    const pokeURL = 'https://pokeapi.co/api/v2/pokemon/' + pokenum
+    
     galleryAddChild.appendChild(divPokeGallery)       
     divPokeGallery.classList.add('poke')
     divPokeGallery.setAttribute('id', 'poke' + pokenum)    
@@ -24,8 +34,66 @@ function addPokemon(pokenum) {
     pokemonFlex.appendChild(imgPokeGallery)
     divPokeGallery.appendChild(divPokeData)   
     divPokeData.setAttribute('id', 'pokeData' + pokenum)
-    pPokeGallery.textContent = 'Name'
-    divPokeData.appendChild(pPokeGallery)
+    divPokeData.classList.add('pokeData')    
+
+    obtenerDatosAPI(pokeURL).then(datos => {
+      const name = (datos.name)
+      const ability = (datos.abilities[0].ability.name)
+      const typeP = (datos.types[0].type.name)
+      
+      if (typeP == 'fire'){
+        document.getElementById('poke' + pokenum).style.backgroundColor = '#f36d54'
+      }
+      if (typeP == 'grass'){
+        document.getElementById('poke' + pokenum).style.backgroundColor = '#e6f1ba'
+      }
+      if (typeP == 'water'){
+        document.getElementById('poke' + pokenum).style.backgroundColor = '#c7dbee'
+      }
+      if (typeP == 'bug'){
+        document.getElementById('poke' + pokenum).style.backgroundColor = '#fee965'
+      }
+      if (typeP == 'normal'){
+        document.getElementById('poke' + pokenum).style.backgroundColor = '#0fffff'
+      }
+      if (typeP == 'electric'){
+        document.getElementById('poke' + pokenum).style.backgroundColor = '#ffff00'
+      }
+
+      pPokeNameLabel.textContent = 'Nombre'
+      pPokeAbilityLabel.textContent = 'Habilidad'
+      pPokeName.textContent = name 
+      pPokeAbility.textContent = ability
+      pPokeTypeLabel.textContent = 'Tipo'
+      pPokeType.textContent =  typeP
+      
+    }).catch(error => {
+      console.error(error);
+  }); 
+
+  
+  pPokeNameLabel.classList.add('label')
+  pPokeAbilityLabel.classList.add('label')
+  pPokeTypeLabel.classList.add('label')
+  
+
+  divPokeData.appendChild(divPokeNameLabel)  
+  divPokeData.appendChild(divPokeAbilityLabel)
+  divPokeData.appendChild(divPokeTypeLabel)
+
+  divPokeNameLabel.appendChild(pPokeNameLabel)  
+  divPokeNameLabel.classList.add('Labeldiv')  
+  divPokeAbilityLabel.classList.add('Labeldiv')
+  divPokeTypeLabel.classList.add('Labeldiv')
+  divPokeNameLabel.appendChild(pPokeName)
+  pPokeAbilityLabel.classList.add('Labeldiv')
+  divPokeAbilityLabel.appendChild(pPokeAbilityLabel)
+  divPokeAbilityLabel.appendChild(pPokeAbility)  
+  divPokeTypeLabel.appendChild(pPokeTypeLabel)  
+  divPokeTypeLabel.appendChild(pPokeType)
+  pPokeName.classList.add("pData_Principal")
+  pPokeAbility.classList.add("pData_Principal")
+  pPokeType.classList.add("pData_Principal")
 }
 
 function max_imgData(){        
@@ -44,22 +112,8 @@ function max_imgData(){
       element.style.pointerEvents = 'none'
     });
 
-    document.getElementById("poke_info").style.display = "flex"     
-     
-    async function obtenerDatosAPI() {
-        const respuesta = await fetch('https://pokeapi.co/api/v2/pokemon/pikachu')
-        const datos = await respuesta.json()
-        return datos       
-      }    
-
-      obtenerDatosAPI().then(datos => {
-        const name = (datos.species.name)
-        const ability = (datos.abilities[1].ability.name);
-
-        pokeData(name,ability)
-      }).catch(error => {
-        console.error(error);
-      });            
+    document.getElementById("poke_info").style.display = "flex"          
+              
 }    
 
 function backStart() {
@@ -80,7 +134,12 @@ function backStart() {
 
     document.getElementById("poke_info").style.display = "none"
 }
+async function obtenerDatosAPI(pokeURL) {
+    const respuesta = await fetch(pokeURL)
+    const datos = await respuesta.json()
+    return datos       
+  }    
 
-function pokeData (name, ability) {
-    console.log(name, ability)
-}
+
+
+
