@@ -1,6 +1,14 @@
+document.getElementById('btn_back').style.display = 'none'
+const pokeCount = 21
+let quantity = 0
 
-for (let i=0; i<50; i++){
-  addPokemon(i)  
+pokemonLoad(quantity, pokeCount)
+
+function pokemonLoad(quantity, pokeCount){  
+  for (let i=quantity; i<pokeCount; i++){
+    addPokemon(i)  
+  }
+  return quantity + pokeCount
 }
 
 function addPokemon(pokenum) {    
@@ -20,14 +28,13 @@ function addPokemon(pokenum) {
     const divPokeData = document.createElement('div')
 
     pokenum = pokenum + 1    
-    const pokeURL = 'https://pokeapi.co/api/v2/pokemon/' + pokenum
-    
+    const pokeURL = 'https://pokeapi.co/api/v2/pokemon/' + pokenum   
     galleryAddChild.appendChild(divPokeGallery)       
     divPokeGallery.classList.add('poke')
-    divPokeGallery.setAttribute('id', 'poke' + pokenum)    
+    divPokeGallery.setAttribute('id', 'poke' + pokenum)  
     const pokemonFlex = document.getElementById('poke'+pokenum)    
     
-    imgPokeGallery.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ pokenum +'.png'
+    imgPokeGallery.src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/'+ pokenum +'.png'    
     imgPokeGallery.alt=''
     imgPokeGallery.title=''
     imgPokeGallery.classList.add('gallery_poke')         
@@ -35,6 +42,10 @@ function addPokemon(pokenum) {
     divPokeGallery.appendChild(divPokeData)   
     divPokeData.setAttribute('id', 'pokeData' + pokenum)
     divPokeData.classList.add('pokeData')    
+
+    document.getElementById('poke' + pokenum).style.width = '220px'
+    document.getElementById('poke' + pokenum).style.height = '250px'
+    
 
     obtenerDatosAPI(pokeURL).then(datos => {
       const name = (datos.name)
@@ -71,6 +82,11 @@ function addPokemon(pokenum) {
       console.error(error);
   }); 
 
+
+  const addWindow = document.getElementById('poke'+pokenum)
+    addWindow.addEventListener('click', function(){
+      max_imgData(pokenum, pokeURL)
+    });
   
   pPokeNameLabel.classList.add('label')
   pPokeAbilityLabel.classList.add('label')
@@ -93,10 +109,14 @@ function addPokemon(pokenum) {
   divPokeTypeLabel.appendChild(pPokeType)
   pPokeName.classList.add("pData_Principal")
   pPokeAbility.classList.add("pData_Principal")
-  pPokeType.classList.add("pData_Principal")
+  pPokeType.classList.add("pData_Principal")  
+
+return pokeURL
 }
 
-function max_imgData(){        
+function max_imgData(pokenum, pokeURL){        
+    
+
     document.getElementById("menu_left").style.filter = "blur(2px)"
     document.getElementById("menu_right").style.filter = "blur(2px)"
     document.getElementById("logo").style.filter = "blur(2px)"       
@@ -106,13 +126,74 @@ function max_imgData(){
     document.getElementById("trivia_menu").style.pointerEvents = "none"
     document.getElementById("about_menu").style.pointerEvents = "none"
     
-    const elements = document.querySelectorAll('.gallery_poke')
+    const elements = document.querySelectorAll('.gallery')    
 
     elements.forEach(element => {
       element.style.pointerEvents = 'none'
     });
 
     document.getElementById("poke_info").style.display = "flex"          
+    
+    obtenerDatosAPI(pokeURL).then(datos => {      
+      const name = (datos.name)
+      const typeP = (datos.types[0].type.name)
+      const abilitiesCount = (datos.abilities.length)      
+      const typeCount = (datos.types.length)
+      let abilities = []
+      let abilitiesText = ''
+      let typeS = []
+      let typeText = ''
+
+      
+      for (let i=0; i < abilitiesCount; i++ ){
+        abilities[i] = (datos.abilities[i].ability.name)
+        if (i==0) {
+          abilitiesText = abilitiesText + abilities[i] 
+        }
+        else {
+          abilitiesText = abilitiesText + '/' + abilities[i] 
+        }
+      }
+
+      for (let i=0; i < typeCount; i++ ){
+        typeS[i] = (datos.types[i].type.name)
+        if (i==0) {
+          typeText = typeText + typeS[i] 
+        }
+        else {
+          typeText = typeText + '/' + typeS[i] 
+        }
+      }
+      
+            
+      document.getElementById('tableName').innerHTML = name
+      document.getElementById('tableAbilities').innerHTML = abilitiesText
+      document.getElementById('tableType').innerHTML = typeText
+
+      document.getElementById('poke_img').src='https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/'+ pokenum +'.png'
+
+      if (typeP == 'fire'){
+        document.getElementById('poke_info').style.backgroundColor = '#f36d54'
+      }
+      if (typeP == 'grass'){
+        document.getElementById('poke_info').style.backgroundColor = '#e6f1ba'
+      }
+      if (typeP == 'water'){
+        document.getElementById('poke_info').style.backgroundColor = '#c7dbee'
+      }
+      if (typeP == 'bug'){
+        document.getElementById('poke_info').style.backgroundColor = '#fee965'
+      }
+      if (typeP == 'normal'){
+        document.getElementById('poke_info').style.backgroundColor = '#0fffff'
+      }
+      if (typeP == 'electric'){
+        document.getElementById('poke_info').style.backgroundColor = '#ffff00'
+      }
+      
+    }).catch(error => {
+      console.error(error);
+  }); 
               
 }    
 
@@ -126,7 +207,7 @@ function backStart() {
     document.getElementById("trivia_menu").style.pointerEvents = "auto"
     document.getElementById("about_menu").style.pointerEvents = "auto"
     
-    const elements = document.querySelectorAll('.gallery_poke')
+    const elements = document.querySelectorAll('.gallery')
 
     elements.forEach(element => {
       element.style.pointerEvents = 'auto'
@@ -138,7 +219,12 @@ async function obtenerDatosAPI(pokeURL) {
     const respuesta = await fetch(pokeURL)
     const datos = await respuesta.json()
     return datos       
-  }    
+}    
+
+function pokemonNewLoad() {  
+  const elements = document.getElementById('gallery')    
+  console.log(elements)   
+}
 
 
 

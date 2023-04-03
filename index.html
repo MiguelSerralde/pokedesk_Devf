@@ -31,11 +31,34 @@
             <div class="gallery" id="gallery">                            
             </div>
             <div class="poke_info" id="poke_info">
-                <img class="poke_img" src="./img/descarga.png" alt="">
+                <img class="poke_img" id='poke_img' alt="">
+                <div>
+                    <table class="pokeTable">
+                        <tr>
+                            <th class="table_left">Caracreristicas</th>
+                            <th class="table_right">Información</th>
+                        </tr>
+                        <tr>
+                            <td class="table_left">Nombre:</td>
+                            <td class="table_right" id="tableName"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_left">Habilidades:</td>
+                            <td class="table_right" id="tableAbilities"></td>
+                        </tr>
+                        <tr>
+                            <td class="table_left">Tipo:</td>
+                            <td class="table_right" id="tableType"></td>
+                        </tr>
+                    </table>
+                </div>
                 <button class="btn_aceptar" onclick="backStart()"> ACEPTAR </button>
             </div>
-        </section>
-        <footer>Footer</footer>
+        </section>        
+        <div class="footer">
+            <button class="button_footer" id="btn_back"><</button>
+            <button class="button_footer" id="btn_forward" onclick="pokemonNewLoad()">></button>
+        </div>
         <script src="./js/script.js"></script>
     </div>
 </body>

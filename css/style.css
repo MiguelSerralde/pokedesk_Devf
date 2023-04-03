@@ -1,3 +1,9 @@
+* {
+    margin: 0;
+    padding: 0;    
+    box-sizing: border-box;
+}
+
 :root {
     font-size: 18px;
     font-weight: bold;
@@ -14,6 +20,7 @@ header {
     flex-direction: row;
     background-color: #fdcef8;    
     text-align: center;
+    position: static;
 }
 
 nav {
@@ -31,20 +38,28 @@ aside {
     background-color: #fdcef8;
 }
 
-footer {
-    background-color: #ffd5da;
+.footer {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
 }
 
 .middle {
     display: flex;
-    height: 95%;
+    flex-direction: block;
+    padding: 10px;
+    justify-content: center;
+    height: 100vh;
     width: 100%;
+    margin-bottom: 0;
+    padding: 0;    
 }
 
 .wrapper {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    margin: 0;           
 }
 
 aside, nav {
@@ -92,55 +107,48 @@ aside, nav {
 
 .logo {
     width: 100%;
-    height: 100px;
+    height: 80px;
 }
 
 .gallery {
-    margin: 40px;
+    margin-top: 10px;
+    margin-left: 40px;
+    margin-right: 40px;    
     display: flex;    
     flex-direction: row;
     justify-content: center;        
-    flex-wrap: wrap;
-    width: 100%;
-    position: relative;
-    column-gap: 10px; 
+    flex-wrap: wrap;        
+    column-gap: 10px;     
+}
 
+.poke img {
+    width: 150px;
+    height: 150px;
+}
+
+.poke {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;      
+    border: 1px solid;     
+    border: 0;
+    padding: 0;
+    flex-basis: 1.33%;
+    justify-content: space-between;
 }
 
 .poke_info {
-    border: 2px solid;
-    margin-left: 25%;
+    border: 2px solid;    
     margin-top: 5%;
     border-radius: 10px;
     display: none;
     position: fixed;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    background-color: antiquewhite;
-    width: 50%;
+    align-items: center;    
+    width: 35%;
     height: 50%;
-}
-
-.gallery img {
-    width: 200px;
-    height: 200px;
-}
-
-.poke {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 220px;
-    height: 40%;
-    padding: 5px;
-    border: 1px solid;
-    margin-bottom: 10px;
-}
-
-.poke-1-data{
-    display: flex;
-    flex-direction: row;    
 }
 
 .btn_aceptar {
@@ -179,6 +187,7 @@ aside, nav {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin: 0;
 }
 
 .pData_Principal{
@@ -196,15 +205,100 @@ aside, nav {
     margin: 0;   
 }
 
-@media (max-width: 600px) {
-    .middle {
-        flex-direction: column;
-    }
 
+.poke_img {
+    margin-top: -20%;
+    height: 20%;
+    height: 90%;
+}
+
+table{
+    border: 1px solid #380707;
+    width: 500px;    
+}
+
+table th{
+    font-weight: bolder;
+}
+
+.table_left {
+    border: 1px solid #380707;
+    font-size: 14px;
+    text-align: center;
+    width: 180px;
+    font-weight: bolder;
+}
+
+.table_right {
+    border: 1px solid #380707;
+    text-align: center;
+    font-size: 14px;
+}
+
+.table_right::first-letter {
+    text-transform: uppercase;
+}
+
+.button_footer {
+    border-radius: 5px;
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    width: 40px;
+    font-size: 20px;
+    font-weight: bolder;  
+    box-shadow: 2px 2px;  
+
+}
+
+@media (max-width: 1493px) {        
+    .middle {
+        position: relative;               
+        width: 80%;
+        height: 80%;
+    }
+    
     .list_menu_left {
         display: block;        
         border: none;
         padding: 0;
+    }      
+    
+    .poke img {
+        width: 120px;
+        height: 120px;
     }
 
+    .poke_info {     
+        width: 35%;
+        height: 50%;
+    }
+
+    table{     
+        width: 300px;    
+    }        
+    
+    .table_left {        
+        font-size: 10px;        
+        width: 130px;        
+    }
+    
+    .table_right {        
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 800px) {
+    table{     
+        width: 260px;    
+    }        
+    
+    .table_left {        
+        font-size: 8px;        
+        width: 110px;        
+    }
+    
+    .table_right {        
+        font-size: 8px;
+    }
 }
