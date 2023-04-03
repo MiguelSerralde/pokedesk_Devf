@@ -267,12 +267,7 @@ table th{
     .poke img {
         width: 120px;
         height: 120px;
-    }
-
-    .poke_info {     
-        width: 35%;
-        height: 50%;
-    }
+    } 
 
     table{     
         width: 300px;    
@@ -291,14 +286,14 @@ table th{
 @media (max-width: 800px) {
     table{     
         width: 260px;    
-    }        
-    
-    .table_left {        
-        font-size: 8px;        
-        width: 110px;        
     }
     
-    .table_right {        
-        font-size: 8px;
+    .poke_info { 
+        width: 70%;        
     }
+    
+    .table_left {                
+        width: 90px;        
+    }    
+
 }
