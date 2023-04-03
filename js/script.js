@@ -222,8 +222,14 @@ async function obtenerDatosAPI(pokeURL) {
 }    
 
 function pokemonNewLoad() {  
-  const elements = document.getElementById('gallery')    
-  console.log(elements)   
+//   const gallery = document.getElementById('gallery')          
+  
+//  for (let i= quantity + 1; i<=pokeCount; i++) {
+//   const poke = document.getElementById('poke'+ i)
+//   gallery.removeChild(poke)
+//  } 
+
+//  pokemonLoad(0, 21) 
 }
 
 
